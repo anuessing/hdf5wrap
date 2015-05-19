@@ -109,12 +109,12 @@ namespace hdf5wrap
     template <class T>
     void createDataset(const std::string& name, const T& value)
     {
-      datasets_[name] = std::shared_ptr<DatasetBase>(new Dataset<T>(value));
+      datasets_[name] = std::unique_ptr<DatasetBase>(new Dataset<T>(value));
     }
 
   private:
-    std::map<std::string, std::shared_ptr<Group> > groups_;
-    std::map<std::string, std::shared_ptr<DatasetBase> > datasets_;
+    std::map<std::string, std::unique_ptr<Group> > groups_;
+    std::map<std::string, std::unique_ptr<DatasetBase> > datasets_;
   };
 
   //! \brief a group in a hdf5 file

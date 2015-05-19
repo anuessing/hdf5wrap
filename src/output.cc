@@ -5,14 +5,14 @@ namespace hdf5wrap
 {
   Group& DataContainer::getGroup(const std::string& name)
   {
-    typedef std::map<std::string, std::shared_ptr<Group> >::iterator It;
-    std::pair<It, bool> p = groups_.insert(std::make_pair(name, std::make_shared<Group>()));
+    typedef std::map<std::string, std::unique_ptr<Group> >::iterator It;
+    std::pair<It, bool> p = groups_.insert(std::make_pair(name, std::unique_ptr<Group>(new Group())));
     return *(p.first->second);
   }
 
   DatasetBase& DataContainer::getDataset(const std::string& name)
   {
-    typedef std::map<std::string, std::shared_ptr<DatasetBase> >::iterator It;
+    typedef std::map<std::string, std::unique_ptr<DatasetBase> >::iterator It;
     It it = datasets_.find(name);
     assert(it != datasets_.end());
     return *(it->second);
