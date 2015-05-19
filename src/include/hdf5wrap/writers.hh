@@ -58,6 +58,15 @@ namespace hdf5wrap
     }
   };
 
+  template <>
+  struct AttributeWriter<bool> {
+    static void write(H5::H5Object& dataset, const std::string& attributeName, const bool& v)
+    {
+      int vi = v;
+      AttributeWriter<int>::write(dataset, attributeName, vi);
+    }
+  };
+
   template <class T>
   struct DataSetWriter;
 
