@@ -93,7 +93,7 @@ namespace hdf5wrap
     }
 
   private:
-    T value_;
+    const T& value_;
   };
 
   class Group;
