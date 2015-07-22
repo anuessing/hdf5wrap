@@ -11,6 +11,30 @@ namespace hdf5wrap
   struct AttributeTraits;
 
   template <>
+  struct AttributeTraits<unsigned int> {
+    typedef H5::IntType Type;
+    static H5::PredType predType;
+    static Type constructType(const unsigned int& v) {
+      return Type(predType);
+    }
+    static const unsigned int * getHandle(const unsigned int& v) {
+      return &v;
+    }
+  };
+
+  template <>
+  struct AttributeTraits<long unsigned int> {
+    typedef H5::IntType Type;
+    static H5::PredType predType;
+    static Type constructType(const long unsigned int& v) {
+      return Type(predType);
+    }
+    static const long unsigned int * getHandle(const long unsigned int& v) {
+      return &v;
+    }
+  };
+
+  template <>
   struct AttributeTraits<int> {
     typedef H5::IntType Type;
     static H5::PredType predType;
